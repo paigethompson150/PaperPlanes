@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    var pages = [CarouselPage(desc: "test", imagePath: "paperplane"), CarouselPage(desc: "hey", imagePath:"gma")]
+    var pages = [
+        CarouselPage(desc: "The app for anonymous, kind messages", imagePath: "paperplane"),
+        CarouselPage(desc: "Connect with real people from around the world", imagePath:"gma"),
+        CarouselPage(desc: "Express your feelings honestly, without judgement", imagePath: "deliver")
+    ]
     
     var body: some View {
         ZStack {
@@ -18,10 +22,12 @@ struct ContentView: View {
                 Spacer()
                 CarouselView(pages: pages)
                 Spacer()
+                
                 Button("Get Started") {
                     print("Hey")
-                }.buttonStyle(.borderedProminent)
+                }.buttonStyle(CustomButtonStyle())
             }
+            .padding(40)
         }
     }
 }

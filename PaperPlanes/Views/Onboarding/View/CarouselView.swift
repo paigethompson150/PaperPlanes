@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarouselView: View {
     var pages: [CarouselPage]
-    var timer = Timer.publish(every: 2.0, on: .main, in:.common).autoconnect()
+    var timer = Timer.publish(every: 6.0, on: .main, in:.common).autoconnect()
     
     @State private var selectedImageIndex: Int = 0
     
@@ -24,10 +24,12 @@ struct CarouselView: View {
 
                     Text("\(pages[index].desc)")
                         .foregroundColor(.white)
-                        .font(.headline)
+                        .font(.title2)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 50)
                 }
-                .frame(width: 250)
+                .frame(maxWidth: .infinity, minHeight: .infinity)
             }
         }
         .frame(height: 300)
@@ -44,7 +46,7 @@ struct CarouselView: View {
                         selectedImageIndex = index
                     }
             }
-            .offset(y: 140)
+            .offset(y: 100)
         }
         .onReceive(timer) { _ in
             withAnimation(.default) {
