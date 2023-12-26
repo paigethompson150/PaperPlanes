@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA095BC22B3B4AD200366FDF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA095BC12B3B4AD200366FDF /* FirebaseAuth */; };
 		CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */; };
 		CA28F59E2B3A8E3200840456 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59D2B3A8E3200840456 /* WelcomeView.swift */; };
 		CA3DF4C92B3AB36F008833A6 /* WelcomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DF4C82B3AB36F008833A6 /* WelcomeTab.swift */; };
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA095BC22B3B4AD200366FDF /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +205,9 @@
 			dependencies = (
 			);
 			name = PaperPlanes;
+			packageProductDependencies = (
+				CA095BC12B3B4AD200366FDF /* FirebaseAuth */,
+			);
 			productName = PaperPlanes;
 			productReference = CA9DC06B2B3A35A500A96DC8 /* PaperPlanes.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +280,9 @@
 				Base,
 			);
 			mainGroup = CA9DC0622B3A35A500A96DC8;
+			packageReferences = (
+				CA095BC02B3B4AD100366FDF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CA9DC06C2B3A35A500A96DC8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -649,6 +657,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CA095BC02B3B4AD100366FDF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA095BC12B3B4AD200366FDF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA095BC02B3B4AD100366FDF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA9DC0632B3A35A500A96DC8 /* Project object */;
 }
