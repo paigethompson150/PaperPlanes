@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var selectedIndex: Int = 0
-    var pages: [WelcomeTab] = [.one, .two, .three, .four]
+    var pages: [WelcomeTab] = [.one, .two, .three, .four, .five]
+    var buttonText: [String] = ["Nice to meet you", "Cool!", "I'll do my best","I understand", "Let's go!"]
     
     var body: some View {
         ZStack {
@@ -17,18 +18,24 @@ struct WelcomeView: View {
             
             VStack{
                 Image("gato")
-                    .frame(width: 3)
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(100)
+                    .padding(.bottom, 30)
+                    .padding(.top, 50)
                 
                 VStack{
                     WelcomeCarousel(selectedIndex: $selectedIndex, pages: pages)
-                    Button("I understand"){
+                        .padding(.bottom, 60)
+                    Button(buttonText[selectedIndex]){
                         withAnimation {
                             if selectedIndex != pages.count-1 {
                                 selectedIndex+=1
                             }
                         }
-                    }.buttonStyle(CustomButtonStyle()).padding(20)
+                    }.buttonStyle(CustomButtonStyle())
                 }
+                .padding(30)
                 .background(.opacity(0.3))
                 .cornerRadius(25)
             }
@@ -54,9 +61,15 @@ struct WelcomeCarousel: View {
                 VStack {
                     Text("\(pages[index].title)")
                         .font(.title2)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .bold()
+                        
+                    Text("\(pages[index].desc)")
+                        .font(.title3)
+                        .padding(.top, 10)
+                        
                 }
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
