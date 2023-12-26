@@ -15,6 +15,7 @@
 		CA9DC08A2B3A35A700A96DC8 /* PaperPlanesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC0892B3A35A700A96DC8 /* PaperPlanesUITests.swift */; };
 		CA9DC08C2B3A35A700A96DC8 /* PaperPlanesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC08B2B3A35A700A96DC8 /* PaperPlanesUITestsLaunchTests.swift */; };
 		CA9DC0A12B3A430500A96DC8 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC0A02B3A430500A96DC8 /* CarouselView.swift */; };
+		CAB79E422B3A7A8C00ABCF61 /* CarouselPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB79E412B3A7A8C00ABCF61 /* CarouselPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		CA9DC08B2B3A35A700A96DC8 /* PaperPlanesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperPlanesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CA9DC0982B3A378F00A96DC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CA9DC0A02B3A430500A96DC8 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		CAB79E412B3A7A8C00ABCF61 /* CarouselPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CarouselPage.swift; path = PaperPlanes/Views/Onboarding/CarouselPage.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		CA9DC09B2B3A3E3900A96DC8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CAB79E412B3A7A8C00ABCF61 /* CarouselPage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB79E422B3A7A8C00ABCF61 /* CarouselPage.swift in Sources */,
 				CA9DC0712B3A35A500A96DC8 /* ContentView.swift in Sources */,
 				CA9DC0A12B3A430500A96DC8 /* CarouselView.swift in Sources */,
 				CA9DC06F2B3A35A500A96DC8 /* PaperPlanesApp.swift in Sources */,

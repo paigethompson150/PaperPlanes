@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    var pages = [CarouselPage(desc: "test", imagePath: "paperplane"), CarouselPage(desc: "hey", imagePath:"gma")]
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
             VStack {
                 Spacer()
-                CarouselView(imageNames: ["paperplane", "gma", "deliver"], carouselText: ["Welcome to Paper Plane. The app for anonymous, kind messages.", "Send your thoughts into the world", "Make connections with new friends"])
+                CarouselView(pages: pages)
                 Spacer()
                 Button("Get Started") {
                     print("Hey")
