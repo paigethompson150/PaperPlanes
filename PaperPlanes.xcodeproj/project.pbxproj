@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */; };
+		CA28F59E2B3A8E3200840456 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59D2B3A8E3200840456 /* WelcomeView.swift */; };
 		CA9DC06F2B3A35A500A96DC8 /* PaperPlanesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC06E2B3A35A500A96DC8 /* PaperPlanesApp.swift */; };
-		CA9DC0712B3A35A500A96DC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC0702B3A35A500A96DC8 /* ContentView.swift */; };
+		CA9DC0712B3A35A500A96DC8 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC0702B3A35A500A96DC8 /* IntroView.swift */; };
 		CA9DC0732B3A35A700A96DC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA9DC0722B3A35A700A96DC8 /* Assets.xcassets */; };
 		CA9DC0762B3A35A700A96DC8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA9DC0752B3A35A700A96DC8 /* Preview Assets.xcassets */; };
 		CA9DC0802B3A35A700A96DC8 /* PaperPlanesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9DC07F2B3A35A700A96DC8 /* PaperPlanesTests.swift */; };
@@ -38,9 +39,10 @@
 
 /* Begin PBXFileReference section */
 		CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		CA28F59D2B3A8E3200840456 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		CA9DC06B2B3A35A500A96DC8 /* PaperPlanes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA9DC06E2B3A35A500A96DC8 /* PaperPlanesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperPlanesApp.swift; sourceTree = "<group>"; };
-		CA9DC0702B3A35A500A96DC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CA9DC0702B3A35A500A96DC8 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		CA9DC0722B3A35A700A96DC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA9DC0752B3A35A700A96DC8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA9DC07B2B3A35A700A96DC8 /* PaperPlanesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperPlanesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,9 +166,10 @@
 		CA9DC09C2B3A3E3E00A96DC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CA9DC0702B3A35A500A96DC8 /* ContentView.swift */,
+				CA9DC0702B3A35A500A96DC8 /* IntroView.swift */,
 				CA9DC0A02B3A430500A96DC8 /* CarouselView.swift */,
 				CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */,
+				CA28F59D2B3A8E3200840456 /* WelcomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -309,7 +312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAB79E422B3A7A8C00ABCF61 /* CarouselPage.swift in Sources */,
-				CA9DC0712B3A35A500A96DC8 /* ContentView.swift in Sources */,
+				CA28F59E2B3A8E3200840456 /* WelcomeView.swift in Sources */,
+				CA9DC0712B3A35A500A96DC8 /* IntroView.swift in Sources */,
 				CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */,
 				CA9DC0A12B3A430500A96DC8 /* CarouselView.swift in Sources */,
 				CA9DC06F2B3A35A500A96DC8 /* PaperPlanesApp.swift in Sources */,
