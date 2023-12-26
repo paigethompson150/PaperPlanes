@@ -12,6 +12,8 @@ struct WelcomeView: View {
     var pages: [WelcomeTab] = [.one, .two, .three, .four, .five]
     var buttonText: [String] = ["Nice to meet you", "Cool!", "I'll do my best","I understand", "Let's go!"]
     
+    @State var showPhoneVerification = false
+    
     var body: some View {
         ZStack {
             Color.pink
@@ -29,7 +31,9 @@ struct WelcomeView: View {
                         .padding(.bottom, 60)
                     Button(buttonText[selectedIndex]){
                         withAnimation {
-                            if selectedIndex != pages.count-1 {
+                            if selectedIndex == pages.count-1 {
+                                showPhoneVerification = true
+                            } else {
                                 selectedIndex+=1
                             }
                         }
@@ -42,6 +46,9 @@ struct WelcomeView: View {
             .padding(40)
         }
         .ignoresSafeArea()
+        .navigationDestination(isPresented: $showPhoneVerification) {
+            PhoneVerificationView()
+        }
     }
     
     struct WelcomeView_Previews: PreviewProvider {
@@ -51,6 +58,8 @@ struct WelcomeView: View {
     }
 }
 
+
+// Welcome Carousel View
 struct WelcomeCarousel: View {
     @Binding var selectedIndex: Int
     var pages: [WelcomeTab]
