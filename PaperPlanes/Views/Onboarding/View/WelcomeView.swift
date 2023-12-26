@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var selectedIndex: Int = 0
-    var pages: [CarouselPage] = [CarouselPage(desc: "test", imagePath: "paperplane"), CarouselPage(desc: "test2", imagePath: "paperplane"), CarouselPage(desc: "test3", imagePath: "paperplane")]
+    var pages: [WelcomeTab] = [.one, .two, .three, .four]
     
     var body: some View {
         ZStack {
@@ -46,13 +46,13 @@ struct WelcomeView: View {
 
 struct WelcomeCarousel: View {
     @Binding var selectedIndex: Int
-    var pages: [CarouselPage]
+    var pages: [WelcomeTab]
     
     var body: some View {
         TabView(selection: $selectedIndex) {
             ForEach(0..<pages.count, id: \.self) { index in
                 VStack {
-                    Text("\(pages[index].desc)")
+                    Text("\(pages[index].title)")
                         .font(.title2)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
