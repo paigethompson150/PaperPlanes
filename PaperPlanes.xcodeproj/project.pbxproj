@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CA095BC22B3B4AD200366FDF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA095BC12B3B4AD200366FDF /* FirebaseAuth */; };
+		CA095BC42B3B4D3200366FDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA095BC32B3B4D3200366FDF /* GoogleService-Info.plist */; };
+		CA095BC52B3B4D3200366FDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA095BC32B3B4D3200366FDF /* GoogleService-Info.plist */; };
+		CA095BC62B3B4D3200366FDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA095BC32B3B4D3200366FDF /* GoogleService-Info.plist */; };
 		CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */; };
 		CA28F59E2B3A8E3200840456 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59D2B3A8E3200840456 /* WelcomeView.swift */; };
 		CA3DF4C92B3AB36F008833A6 /* WelcomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DF4C82B3AB36F008833A6 /* WelcomeTab.swift */; };
@@ -41,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA095BC32B3B4D3200366FDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		CA28F59D2B3A8E3200840456 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		CA3DF4C82B3AB36F008833A6 /* WelcomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTab.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		CA9DC0622B3A35A500A96DC8 = {
 			isa = PBXGroup;
 			children = (
+				CA095BC32B3B4D3200366FDF /* GoogleService-Info.plist */,
 				CA9DC06D2B3A35A500A96DC8 /* PaperPlanes */,
 				CA9DC07E2B3A35A700A96DC8 /* PaperPlanesTests */,
 				CA9DC0882B3A35A700A96DC8 /* PaperPlanesUITests */,
@@ -301,6 +306,7 @@
 			files = (
 				CA9DC0762B3A35A700A96DC8 /* Preview Assets.xcassets in Resources */,
 				CA9DC0732B3A35A700A96DC8 /* Assets.xcassets in Resources */,
+				CA095BC42B3B4D3200366FDF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA095BC52B3B4D3200366FDF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA095BC62B3B4D3200366FDF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
