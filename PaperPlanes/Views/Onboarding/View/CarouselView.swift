@@ -21,7 +21,7 @@ struct CarouselView: View {
                         .resizable()
                         .tag(index)
                         .frame(width: 200, height: 200)
-
+                    
                     Text("\(pages[index].desc)")
                         .foregroundColor(.white)
                         .font(.title2)
@@ -41,17 +41,16 @@ struct CarouselView: View {
             ForEach(0..<pages.count, id: \.self) { index in
                 Capsule()
                     .fill(Color.white.opacity(selectedImageIndex == index ? 1 : 0.33))
-                    .frame(width: 8, height: 8)
+                    .frame(width: selectedImageIndex == index ? 20 : 10, height: 10)
                     .onTapGesture {
                         selectedImageIndex = index
                     }
+                    .animation(.easeInOut, value: selectedImageIndex)
             }
             .offset(y: 100)
         }
         .onReceive(timer) { _ in
-            withAnimation(.default) {
-                selectedImageIndex = (selectedImageIndex+1)%pages.count
-            }
+            selectedImageIndex = (selectedImageIndex+1)%pages.count
         }
     }
 }
