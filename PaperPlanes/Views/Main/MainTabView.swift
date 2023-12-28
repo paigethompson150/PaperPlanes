@@ -12,17 +12,22 @@ struct MainTabView: View {
         TabView {
             IntroView()
                 .tabItem {
-                    Label("Msg", systemImage: "tray.and.arrow.down.fill")
+                    Label("Msg", systemImage: "envelope")
                 }
             
             WelcomeView()
                 .tabItem {
-                    Label("Home", systemImage: "tray.and.arrow.up.fill")
+                    Label("Home", systemImage: "house")
                 }
             
             PhoneVerificationView()
                 .tabItem {
-                    Label("Hey", systemImage: "tray.and.arrow.down.fill")
+                    Label("Hey", systemImage: "pencil.line")
+                }
+            
+            PhoneVerificationView()
+                .tabItem {
+                    Label("test", systemImage: "questionmark.circle")
                 }
         }
         .navigationBarBackButtonHidden()

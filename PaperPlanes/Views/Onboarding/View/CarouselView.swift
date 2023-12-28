@@ -35,6 +35,9 @@ struct CarouselView: View {
         .frame(height: 300)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .ignoresSafeArea()
+        .onDisappear {
+            timer.upstream.connect().cancel()
+        }
         
         // Pagination
         HStack {
@@ -57,7 +60,7 @@ struct CarouselView: View {
 
 struct CarouselView_Previews: PreviewProvider {
     static var previews: some View {
-        var pages = [CarouselPage(desc: "test", imagePath: "paperplane"), CarouselPage(desc: "hey", imagePath:"gma")]
+        let pages = [CarouselPage(desc: "test", imagePath: "paperplane"), CarouselPage(desc: "hey", imagePath:"gma")]
         
         ZStack{
             Color.blue

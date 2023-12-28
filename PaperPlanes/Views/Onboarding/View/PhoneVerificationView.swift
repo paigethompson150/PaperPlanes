@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhoneVerificationView: View {
     @State private var phoneNumber: String = ""
-    @State private var showMain: Bool = false
+    @State private var showCodeVerification: Bool = false
     
     var body: some View {
         VStack {
@@ -35,7 +35,7 @@ struct PhoneVerificationView: View {
             Spacer()
             Button {
                 //phone verification here
-                showMain = true
+                showCodeVerification = true
             } label: {
                 Text("Send Code")
             }
@@ -43,8 +43,8 @@ struct PhoneVerificationView: View {
         }
         .padding(40)
         .background(Color.blue.opacity(0.2))
-        .navigationDestination(isPresented: $showMain) {
-            MainTabView()
+        .navigationDestination(isPresented: $showCodeVerification) {
+            CodeVerificationView()
         }
     }
 }
