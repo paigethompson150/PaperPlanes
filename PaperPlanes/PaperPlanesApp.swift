@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct PaperPlanesApp: App {
     // register app delegate for Firebase setup
-      @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {

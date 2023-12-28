@@ -16,7 +16,7 @@ struct WelcomeView: View {
     
     var body: some View {
         ZStack {
-            Color.pink
+            Color.blue.opacity(0.2)
             
             VStack{
                 Image("gato")
@@ -40,7 +40,7 @@ struct WelcomeView: View {
                     }.buttonStyle(CustomButtonStyle())
                 }
                 .padding(30)
-                .background(.opacity(0.3))
+                .background(.opacity(0.05))
                 .cornerRadius(25)
             }
             .padding(40)
