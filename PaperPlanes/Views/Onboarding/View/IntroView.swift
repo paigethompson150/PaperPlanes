@@ -21,10 +21,19 @@ struct IntroView: View {
                 
             VStack {
                 Spacer()
+                Text("Paper Plane")
+                    .font(.title)
+                    .foregroundColor(.white)
+                Spacer()
                 CarouselView(pages: pages)
                 Spacer()
                 
-                Button("Get Started") {
+                Button("Log In") {
+                    
+                }.buttonStyle(CustomButtonStyle())
+                Divider()
+                    .padding(5)
+                Button("Sign Up") {
                     showIntro = true
                 }.buttonStyle(CustomButtonStyle())
             }

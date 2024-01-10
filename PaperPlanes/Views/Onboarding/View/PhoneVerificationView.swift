@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct PhoneVerificationView: View {
     @State private var phoneNumber: String = ""
@@ -35,7 +36,20 @@ struct PhoneVerificationView: View {
             Spacer()
             Button {
                 //phone verification here
-                showCodeVerification = true
+                PhoneAuthProvider.provider()
+                  .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+                      if let error = error {
+                        print(error.localizedDescription)
+                        return
+                      }
+                      // Sign in using the verificationID and the code sent to the user
+                      // ...
+                      if phoneNumber == verificationID {
+                          showCodeVerification = true
+                      } else {
+                          print("incorrect")
+                      }
+                  }
             } label: {
                 Text("Send Code")
             }

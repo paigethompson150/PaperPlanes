@@ -10,24 +10,24 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            IntroView()
+            ProfileView()
                 .tabItem {
-                    Label("Msg", systemImage: "envelope")
+                    Label("", systemImage: "person.crop.circle")
                 }
             
-            WelcomeView()
+            LettersListView()
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label("", systemImage: "envelope")
                 }
             
-            PhoneVerificationView()
+            PlanesView()
                 .tabItem {
-                    Label("Hey", systemImage: "pencil.line")
+                    Label("", systemImage: "paperplane")
                 }
             
-            PhoneVerificationView()
+            HelpView()
                 .tabItem {
-                    Label("test", systemImage: "questionmark.circle")
+                    Label("", systemImage: "questionmark.circle")
                 }
         }
         .navigationBarBackButtonHidden()

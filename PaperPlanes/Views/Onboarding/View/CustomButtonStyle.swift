@@ -18,4 +18,3 @@ struct CustomButtonStyle: ButtonStyle {
             .cornerRadius(15)
     }
 }
-

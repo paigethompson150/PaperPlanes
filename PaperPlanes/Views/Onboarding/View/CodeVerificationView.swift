@@ -52,7 +52,7 @@ struct CodeVerificationView: View {
                 //phone verification here
                 login = true
             } label: {
-                Text("Send Code")
+                Text("Confirm")
             }
             .buttonStyle(CustomButtonStyle())
         }
