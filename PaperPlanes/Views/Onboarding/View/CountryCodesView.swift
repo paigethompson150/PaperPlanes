@@ -8,26 +8,68 @@
 import Foundation
 import SwiftUI
 
+struct CountryCodesView: View {
+    
+    @State private var searchText = ""
+    @State private var currentCountryLocale: Locale = Locale.current
+    @State private var selectedCountry: Country = Country(code: "",calling: "")
+    private var countries = CountryCodesModel().countryDictionary
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(filteredCountries, id: \.self) { country in
+                    HStack {
+                        Text(flag(country:country.code))
+                        Text(country.code)
+                        Spacer()
+                        Text("+" + country.calling)
+                    }
+                    .onTapGesture {
+                        selectedCountry = country
+                    }
+                    
+                }
+            }
+            .searchable(text: $searchText)
+        }
+    }
+    var filteredCountries: [Country] {
+        guard !searchText.isEmpty else { return countries }
+        return countries.filter { country in
+                country.code.lowercased().contains(searchText.lowercased())
+            }
+        }
+    
+// Commenting out until full country names are added in a future release
+//    func countryName(countryCode: String) -> String? {
+//        let current = Locale(identifier: "en_US")
+//        return current.localizedString(forRegionCode: countryCode)
+//    }
+    
+    func flag(country:String) -> String {
+        let base : UInt32 = 127397
+        var flag = ""
+        for v in country.unicodeScalars {
+            flag.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+        }
+        return flag
+    }
+}
+
+struct CountryCodesView_Previews: PreviewProvider {
+    static var previews: some View {
+        CountryCodesView()
+    }
+}
+
+
 struct Country: Hashable {
     var code: String
     var calling: String
 }
 
-struct CountryCodesView: View {
-    var body: some View {
-        List {
-            ForEach(countryDictionary, id: \.self) { country in
-                HStack {
-                    Text(flag(country:country.code))
-                    Text(countryName(countryCode: country.code) ?? "")
-                    Spacer()
-                    Text("+1" + country.calling)
-                }
-                
-            }
-        }
-        
-    }
+struct CountryCodesModel {
     let countryDictionary  = ["AF":"93","AL":"355","DZ":"213","US":"1",
                                 "AD":"376","AO":"244","AI":"1","AG":"1","AR":"54",
                                 "AM":"374","AW":"297","AU":"61","AT":"43","AZ":"994",
@@ -74,24 +116,5 @@ struct CountryCodesView: View {
                                 "SO":"252","SJ":"47","SY":"963","TW":"886","TZ":"255",
                                 "TL":"670","VE":"58","VN":"84","VG":"284","VI":"340"]
                                 .map(Country.init)
-    
-    func countryName(countryCode: String) -> String? {
-        let current = Locale(identifier: "en_US")
-        return current.localizedString(forRegionCode: countryCode)
-    }
-    
-    func flag(country:String) -> String {
-        let base : UInt32 = 127397
-        var flag = ""
-        for v in country.unicodeScalars {
-            flag.unicodeScalars.append(UnicodeScalar(base + v.value)!)
-        }
-        return flag
-    }
 }
 
-struct CountryCodesView_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryCodesView()
-    }
-}
