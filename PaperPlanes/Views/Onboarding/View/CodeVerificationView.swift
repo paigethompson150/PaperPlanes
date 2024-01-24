@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct CodeVerificationView: View {
-    @State var verificationID: String
+    var phoneNumber: String
+    @State var verificationCode: String
     @State private var userVerificationInput: String = ""
     @State private var login: Bool = false
     @State private var timeRemaining = 30
@@ -42,16 +44,15 @@ struct CodeVerificationView: View {
                 Text("Resend verification?")
                     .allowsHitTesting(timeRemaining == 0 ? true : false)
                     .onTapGesture {
-                        //resend code w/ phone number
-                        
+                        resendVerification()
                         timeRemaining = 30
                         self.timer = Timer.publish(every: 1.0, on: .main, in:.common).autoconnect()
                     }
             }
             
             Button {
-                //NOTE: Verify verificationID == userVerificationInput
-                login = true
+                if verifyVerificationId() { login = true }
+                else { print("incorrect verification id")}
             } label: {
                 Text("Confirm")
             }
@@ -72,4 +73,22 @@ struct CodeVerificationView: View {
             timer.upstream.connect().cancel()
         }
     }
+    
+    func resendVerification() {
+        PhoneAuthProvider.provider()
+          .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+              if let error = error {
+                print(error.localizedDescription)
+                return
+              }
+              verificationCode = verificationID!
+          }
+    }
+    
+    func verifyVerificationId() -> Bool {
+        if userVerificationInput == verificationCode { return true }
+        return false
+    }
+    
+    
 }

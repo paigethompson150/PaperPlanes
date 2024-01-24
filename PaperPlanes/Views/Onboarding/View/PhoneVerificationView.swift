@@ -55,7 +55,7 @@ struct PhoneVerificationView: View {
         .padding(40)
         .background(Color.blue.opacity(0.2))
         .navigationDestination(isPresented: $showCodeVerification) {
-            CodeVerificationView(verificationID: verificationCode)
+            CodeVerificationView(phoneNumber: phoneNumber, verificationCode: verificationCode)
         }
     }
 }
