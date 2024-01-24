@@ -4,6 +4,22 @@
 //
 //  Created by Paige Thompson on 12/26/23.
 //
+/*
+ License for Country Code Picker:
+ MIT License
+
+ Copyright (c) 2022 Mobven
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ */
 
 import SwiftUI
 import FirebaseAuth
@@ -12,6 +28,8 @@ struct PhoneVerificationView: View {
     @State private var verificationCode: String = ""
     @State private var phoneNumber: String = ""
     @State private var showCodeVerification: Bool = false
+    @State private var selectedCountryEmoji: String = "🇺🇸"
+    @State private var selectedCountryCode: String = "+1"
     
     var body: some View {
         VStack {
@@ -23,7 +41,16 @@ struct PhoneVerificationView: View {
             }
             
             HStack {
-                Text("🇺🇸")
+                // MARK: Country Picker
+                Button {
+                } label: {
+                    HStack {
+                        // MARK: Autofill with user's country if possible
+                        Text(selectedCountryEmoji)
+                        Text(selectedCountryCode)
+                    }
+                }
+
                 TextField("", text: $phoneNumber,prompt: Text("(615) 975-3270)")
                 )
                 .font(.title2)
@@ -36,14 +63,13 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                //phone verification here
+                // NOTE: Phone Number Verification
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                       if let error = error {
                         print(error.localizedDescription)
                         return
                       }
-                      // NOTE: Add verifyphoneNumber() here
                       verificationCode = verificationID!
                       showCodeVerification = true
                   }
