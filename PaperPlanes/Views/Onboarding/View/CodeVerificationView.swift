@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CodeVerificationView: View {
-    @State private var verficationCode: String = ""
+    @State var verificationID: String
+    @State private var userVerificationInput: String = ""
     @State private var login: Bool = false
     @State private var timeRemaining = 30
     
@@ -24,7 +25,7 @@ struct CodeVerificationView: View {
             }
             
             HStack {
-                TextField("", text: $verficationCode, prompt: Text("1111")
+                TextField("", text: $userVerificationInput, prompt: Text("1111")
                 )
                 .font(.title2)
             }
@@ -49,7 +50,7 @@ struct CodeVerificationView: View {
             }
             
             Button {
-                //phone verification here
+                //NOTE: Verify verificationID == userVerificationInput
                 login = true
             } label: {
                 Text("Confirm")
@@ -70,11 +71,5 @@ struct CodeVerificationView: View {
         .onDisappear {
             timer.upstream.connect().cancel()
         }
-    }
-}
-
-struct CodeVerificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        CodeVerificationView()
     }
 }
