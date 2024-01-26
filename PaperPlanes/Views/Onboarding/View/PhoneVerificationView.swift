@@ -4,12 +4,35 @@
 //
 //  Created by Paige Thompson on 12/26/23.
 //
+/*
+ License for Country Code Picker:
+ MIT License
+
+ Copyright (c) 2022 Mobven
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ */
 
 import SwiftUI
+import FirebaseAuth
 
 struct PhoneVerificationView: View {
+    @State private var verificationCode: String = ""
     @State private var phoneNumber: String = ""
-    @State private var showMain: Bool = false
+    @State private var selectedCountry: Country = Country(code: "",calling: "")
+    private var countries = CountryCodesModel().countryDictionary
+    
+    // Navigation
+    @State private var showCodeVerification: Bool = false
+    @State var showingCountryPicker = false
     
     var body: some View {
         VStack {
@@ -21,7 +44,17 @@ struct PhoneVerificationView: View {
             }
             
             HStack {
-                Text("🇺🇸")
+                // MARK: Country Picker
+                Button {
+                    showingCountryPicker = true
+                } label: {
+                    HStack {
+                        // MARK: Autofill with user's country if possible
+                        Text(selectedCountry.code.flag())
+                        Text("+"+selectedCountry.calling)
+                    }
+                }
+
                 TextField("", text: $phoneNumber,prompt: Text("(615) 975-3270)")
                 )
                 .font(.title2)
@@ -34,8 +67,16 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                //phone verification here
-                showMain = true
+                // MARK: Phone Number Verification
+                PhoneAuthProvider.provider()
+                  .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+                      if let error = error {
+                        print(error.localizedDescription)
+                        return
+                      }
+                      verificationCode = verificationID!
+                      showCodeVerification = true
+                  }
             } label: {
                 Text("Send Code")
             }
@@ -43,14 +84,36 @@ struct PhoneVerificationView: View {
         }
         .padding(40)
         .background(Color.blue.opacity(0.2))
-        .navigationDestination(isPresented: $showMain) {
-            MainTabView()
+        .onAppear {
+            setDefaultCountry()
+        }
+        .sheet(isPresented: $showingCountryPicker) {
+            CountryCodesView(selectedCountry: self.$selectedCountry)
+        }
+        .navigationDestination(isPresented: $showCodeVerification) {
+            CodeVerificationView(phoneNumber: phoneNumber, verificationCode: verificationCode)
         }
     }
+    
+    
 }
 
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         PhoneVerificationView()
+    }
+}
+
+extension PhoneVerificationView {
+    
+    // MARK: Set user's default country to their locale
+    func setDefaultCountry() {
+        if selectedCountry.code == "" {
+            for country in countries {
+                if Locale.current.region?.identifier == country.code {
+                    selectedCountry = country
+                }
+            }
+        }
     }
 }
