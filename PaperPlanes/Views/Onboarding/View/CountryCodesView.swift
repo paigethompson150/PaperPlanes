@@ -9,24 +9,31 @@ import Foundation
 import SwiftUI
 
 struct CountryCodesView: View {
+    @Binding var selectedCountry: Country
     
     @State private var searchText = ""
-    @State private var currentCountryLocale: Locale = Locale.current
-    @State private var selectedCountry: Country = Country(code: "",calling: "")
-    private var countries = CountryCodesModel().countryDictionary
+    @State private var countries = CountryCodesModel().countryDictionary
+    var filteredCountries: [Country] {
+        guard !searchText.isEmpty else { return countries }
+        return countries.filter { country in
+                country.code.lowercased().contains(searchText.lowercased())
+            }
+        }
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(filteredCountries, id: \.self) { country in
                     HStack {
-                        Text(flag(country:country.code))
+                        Text(country.code.flag())
                         Text(country.code)
                         Spacer()
                         Text("+" + country.calling)
                     }
                     .onTapGesture {
-                        selectedCountry = country
+                        self.selectedCountry = country
+                        dismiss()
                     }
                     
                 }
@@ -34,32 +41,16 @@ struct CountryCodesView: View {
             .searchable(text: $searchText)
         }
     }
-    var filteredCountries: [Country] {
-        guard !searchText.isEmpty else { return countries }
-        return countries.filter { country in
-                country.code.lowercased().contains(searchText.lowercased())
-            }
-        }
-    
-// Commenting out until full country names are added in a future release
-//    func countryName(countryCode: String) -> String? {
-//        let current = Locale(identifier: "en_US")
-//        return current.localizedString(forRegionCode: countryCode)
-//    }
-    
-    func flag(country:String) -> String {
+}
+
+extension String {
+    func flag() -> String {
         let base : UInt32 = 127397
         var flag = ""
-        for v in country.unicodeScalars {
+        for v in self.unicodeScalars {
             flag.unicodeScalars.append(UnicodeScalar(base + v.value)!)
         }
         return flag
-    }
-}
-
-struct CountryCodesView_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryCodesView()
     }
 }
 

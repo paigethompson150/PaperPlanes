@@ -27,9 +27,12 @@ import FirebaseAuth
 struct PhoneVerificationView: View {
     @State private var verificationCode: String = ""
     @State private var phoneNumber: String = ""
+    @State private var selectedCountry: Country = Country(code: "",calling: "")
+    private var countries = CountryCodesModel().countryDictionary
+    
+    // Navigation
     @State private var showCodeVerification: Bool = false
-    @State private var selectedCountryEmoji: String = "🇺🇸"
-    @State private var selectedCountryCode: String = "+1"
+    @State var showingCountryPicker = false
     
     var body: some View {
         VStack {
@@ -43,11 +46,12 @@ struct PhoneVerificationView: View {
             HStack {
                 // MARK: Country Picker
                 Button {
+                    showingCountryPicker = true
                 } label: {
                     HStack {
                         // MARK: Autofill with user's country if possible
-                        Text(selectedCountryEmoji)
-                        Text(selectedCountryCode)
+                        Text(selectedCountry.code.flag())
+                        Text("+"+selectedCountry.calling)
                     }
                 }
 
@@ -63,7 +67,7 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                // NOTE: Phone Number Verification
+                // MARK: Phone Number Verification
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                       if let error = error {
@@ -80,14 +84,36 @@ struct PhoneVerificationView: View {
         }
         .padding(40)
         .background(Color.blue.opacity(0.2))
+        .onAppear {
+            setDefaultCountry()
+        }
+        .sheet(isPresented: $showingCountryPicker) {
+            CountryCodesView(selectedCountry: self.$selectedCountry)
+        }
         .navigationDestination(isPresented: $showCodeVerification) {
             CodeVerificationView(phoneNumber: phoneNumber, verificationCode: verificationCode)
         }
     }
+    
+    
 }
 
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         PhoneVerificationView()
+    }
+}
+
+extension PhoneVerificationView {
+    
+    // MARK: Set user's default country to their locale
+    func setDefaultCountry() {
+        if selectedCountry.code == "" {
+            for country in countries {
+                if Locale.current.region?.identifier == country.code {
+                    selectedCountry = country
+                }
+            }
+        }
     }
 }
