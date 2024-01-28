@@ -67,16 +67,7 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                // MARK: Phone Number Verification
-                PhoneAuthProvider.provider()
-                  .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-                      if let error = error {
-                        print(error.localizedDescription)
-                        return
-                      }
-                      verificationCode = verificationID!
-                      showCodeVerification = true
-                  }
+                verifyPhoneNumber()
             } label: {
                 Text("Send Code")
             }
@@ -115,5 +106,22 @@ extension PhoneVerificationView {
                 }
             }
         }
+    }
+}
+
+
+extension PhoneVerificationView {
+    
+    // MARK: Phone Number Verification
+    func verifyPhoneNumber() {
+        PhoneAuthProvider.provider()
+            .verifyPhoneNumber("+"+selectedCountry.calling+phoneNumber, uiDelegate: nil) { verificationID, error in
+              if let error = error {
+                print(error.localizedDescription)
+                return
+              }
+              verificationCode = verificationID!
+              showCodeVerification = true
+          }
     }
 }
