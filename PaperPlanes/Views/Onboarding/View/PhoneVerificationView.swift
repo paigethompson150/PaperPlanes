@@ -82,7 +82,7 @@ struct PhoneVerificationView: View {
             CountryCodesView(selectedCountry: self.$selectedCountry)
         }
         .navigationDestination(isPresented: $showCodeVerification) {
-            CodeVerificationView(phoneNumber: phoneNumber, verificationCode: verificationCode)
+            CodeVerificationView(phoneNumber: "+"+selectedCountry.calling+phoneNumber, verificationCode: verificationCode)
         }
     }
     

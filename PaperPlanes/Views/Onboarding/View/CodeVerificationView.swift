@@ -39,19 +39,18 @@ struct CodeVerificationView: View {
             
             Spacer()
             HStack {
-                Text("\(timeRemaining == 0 ? "" : String(timeRemaining))")
+                Text("\(formatTimeRemaining())")
 
                 Text("Resend verification?")
                     .allowsHitTesting(timeRemaining == 0 ? true : false)
                     .onTapGesture {
                         resendVerification()
-                        timeRemaining = 30
-                        self.timer = Timer.publish(every: 1.0, on: .main, in:.common).autoconnect()
+                        createNewTimer()
                     }
             }
             
             Button {
-                if verifyVerificationId() { login = true }
+                if verifyUserCode() { login = true }
                 else { print("incorrect verification id")}
             } label: {
                 Text("Confirm")
@@ -64,16 +63,44 @@ struct CodeVerificationView: View {
             MainTabView()
         }
         .onReceive(timer) { _ in
-            timeRemaining-=1
-            if timeRemaining == 0 {
-                timer.upstream.connect().cancel()
-            }
+            decrementTimer()
         }
         .onDisappear {
-            timer.upstream.connect().cancel()
+            cancelTimer()
+        }
+    }
+}
+
+
+
+// MARK: Timer handling
+extension CodeVerificationView {
+    
+    func decrementTimer() {
+        timeRemaining-=1
+        if timeRemaining == 0 {
+            cancelTimer()
         }
     }
     
+    func cancelTimer() {
+        timer.upstream.connect().cancel()
+    }
+    
+    func createNewTimer() {
+        timeRemaining = 30
+        self.timer = Timer.publish(every: 1.0, on: .main, in:.common).autoconnect()
+    }
+    
+    func formatTimeRemaining() -> String {
+        if timeRemaining == 0 { return "" }
+        return String(timeRemaining)
+    }
+}
+
+// MARK: Verification handling
+extension CodeVerificationView {
+
     func resendVerification() {
         PhoneAuthProvider.provider()
           .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
@@ -85,10 +112,8 @@ struct CodeVerificationView: View {
           }
     }
     
-    func verifyVerificationId() -> Bool {
+    func verifyUserCode() -> Bool {
         if userVerificationInput == verificationCode { return true }
         return false
     }
-    
-    
 }
