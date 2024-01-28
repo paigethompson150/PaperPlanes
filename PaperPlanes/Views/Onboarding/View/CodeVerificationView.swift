@@ -12,7 +12,7 @@ struct CodeVerificationView: View {
     var phoneNumber: String
     @State var verificationCode: String
     @State private var userVerificationInput: String = ""
-    @State private var login: Bool = false
+    @State private var enableLoginView: Bool = false
     @State private var timeRemaining = 30
     
     @State var timer = Timer.publish(every: 1.0, on: .main, in:.common).autoconnect()
@@ -50,8 +50,7 @@ struct CodeVerificationView: View {
             }
             
             Button {
-                if verifyUserCode() { login = true }
-                else { print("incorrect verification id")}
+                enableLoginView = verifyUserCode()
             } label: {
                 Text("Confirm")
             }
@@ -59,7 +58,7 @@ struct CodeVerificationView: View {
         }
         .padding(40)
         .background(Color.blue.opacity(0.2))
-        .navigationDestination(isPresented: $login) {
+        .navigationDestination(isPresented: $enableLoginView) {
             MainTabView()
         }
         .onReceive(timer) { _ in
