@@ -10,8 +10,8 @@ import FirebaseAuth
 
 struct CodeVerificationView: View {
     var phoneNumber: String
-    @State var verificationCode: String
-    @State private var userVerificationInput: String = ""
+    @Binding var OTP: String
+    @State private var userInputOTP: String = ""
     @State private var enableLoginView: Bool = false
     @State private var timeRemaining = 30
     
@@ -27,7 +27,7 @@ struct CodeVerificationView: View {
             }
             
             HStack {
-                TextField("", text: $userVerificationInput, prompt: Text("1111")
+                TextField("", text: $userInputOTP, prompt: Text("1111")
                 )
                 .font(.title2)
             }
@@ -50,7 +50,7 @@ struct CodeVerificationView: View {
             }
             
             Button {
-                enableLoginView = verifyUserCode()
+                signInWithPhoneAuthCredential()
             } label: {
                 Text("Confirm")
             }
@@ -67,8 +67,31 @@ struct CodeVerificationView: View {
         .onDisappear {
             cancelTimer()
         }
+        .onAppear { print("onAppear OTP IS" + OTP)}
+    }
+    
+    func signInWithPhoneAuthCredential() {
+        print("on signIn the OTP is" + OTP)
+        let credential = PhoneAuthProvider.provider().credential(
+          withVerificationID: OTP,
+          verificationCode: userInputOTP
+        )
+        
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+              // ...
+            return
+        }
+        print("the user is now signed in I guess?")
+        enableLoginView = true
+            // User is signed in
+            // ...
     }
 }
+
 
 
 
@@ -97,6 +120,7 @@ extension CodeVerificationView {
     }
 }
 
+
 // MARK: Verification handling
 extension CodeVerificationView {
 
@@ -107,12 +131,8 @@ extension CodeVerificationView {
                 print(error.localizedDescription)
                 return
               }
-              verificationCode = verificationID!
+              //UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+              OTP = verificationID!
           }
-    }
-    
-    func verifyUserCode() -> Bool {
-        if userVerificationInput == verificationCode { return true }
-        return false
     }
 }

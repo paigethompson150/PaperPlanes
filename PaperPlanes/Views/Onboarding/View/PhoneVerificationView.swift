@@ -25,7 +25,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct PhoneVerificationView: View {
-    @State private var verificationCode: String = ""
+    @State private var verificationID: String = ""
     @State private var phoneNumber: String = ""
     @State private var selectedCountry: Country = Country(code: "",calling: "")
     private var countries = CountryCodesModel().countryDictionary
@@ -68,6 +68,7 @@ struct PhoneVerificationView: View {
             Spacer()
             Button {
                 verifyPhoneNumber()
+                showCodeVerification = true
             } label: {
                 Text("Send Code")
             }
@@ -78,15 +79,16 @@ struct PhoneVerificationView: View {
         .onAppear {
             setDefaultCountry()
         }
+        .onDisappear {
+            print("disappearing OTP Is" + verificationID)
+        }
         .sheet(isPresented: $showingCountryPicker) {
             CountryCodesView(selectedCountry: self.$selectedCountry)
         }
         .navigationDestination(isPresented: $showCodeVerification) {
-            CodeVerificationView(phoneNumber: "+"+selectedCountry.calling+phoneNumber, verificationCode: verificationCode)
+            CodeVerificationView(phoneNumber: "+"+selectedCountry.calling+phoneNumber, OTP: $verificationID)
         }
     }
-    
-    
 }
 
 struct PhoneVerificationView_Previews: PreviewProvider {
@@ -112,7 +114,7 @@ extension PhoneVerificationView {
 
 extension PhoneVerificationView {
     
-    // MARK: Phone Number Verification
+//    // MARK: Phone Number Verification
     func verifyPhoneNumber() {
         PhoneAuthProvider.provider()
             .verifyPhoneNumber("+"+selectedCountry.calling+phoneNumber, uiDelegate: nil) { verificationID, error in
@@ -120,8 +122,9 @@ extension PhoneVerificationView {
                 print(error.localizedDescription)
                 return
               }
-              verificationCode = verificationID!
-              showCodeVerification = true
+              //UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+              self.verificationID = verificationID!
           }
+          return
     }
 }
