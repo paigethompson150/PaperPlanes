@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA095BC22B3B4AD200366FDF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA095BC12B3B4AD200366FDF /* FirebaseAuth */; };
+		CA1896DB2B68172A00BEBCE3 /* PhoneErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1896DA2B68172A00BEBCE3 /* PhoneErrorView.swift */; };
 		CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */; };
 		CA28F59E2B3A8E3200840456 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28F59D2B3A8E3200840456 /* WelcomeView.swift */; };
 		CA3DF4C92B3AB36F008833A6 /* WelcomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DF4C82B3AB36F008833A6 /* WelcomeTab.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA1896DA2B68172A00BEBCE3 /* PhoneErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneErrorView.swift; sourceTree = "<group>"; };
 		CA198F9A2B4C976D000E344D /* PaperPlanes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaperPlanes.entitlements; sourceTree = "<group>"; };
 		CA28F59B2B3A83C400840456 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		CA28F59D2B3A8E3200840456 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				CA3DF4CD2B3ABC29008833A6 /* PhoneVerificationView.swift */,
 				CADEA5B42B3D0B1100C65375 /* CodeVerificationView.swift */,
 				CA929F5A2B616FB7003AA069 /* CountryCodesView.swift */,
+				CA1896DA2B68172A00BEBCE3 /* PhoneErrorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				CA28F59C2B3A83C400840456 /* CustomButtonStyle.swift in Sources */,
 				CA9DC0A12B3A430500A96DC8 /* CarouselView.swift in Sources */,
 				CA3DF4CE2B3ABC29008833A6 /* PhoneVerificationView.swift in Sources */,
+				CA1896DB2B68172A00BEBCE3 /* PhoneErrorView.swift in Sources */,
 				CA3F1D4A2B607E2200E3CA19 /* AppDelegate.swift in Sources */,
 				CA9DC06F2B3A35A500A96DC8 /* PaperPlanesApp.swift in Sources */,
 			);

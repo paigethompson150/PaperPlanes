@@ -33,6 +33,7 @@ struct PhoneVerificationView: View {
     // Navigation
     @State private var showCodeVerification: Bool = false
     @State var showingCountryPicker = false
+    @State var showErrorSheet = false
     
     var body: some View {
         VStack {
@@ -67,8 +68,12 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                verifyPhoneNumber()
-                showCodeVerification = true
+                if verifyPhoneNumberisValid() {
+                    sendVerificationID()
+                    showCodeVerification = true
+                } else {
+                    showErrorSheet = true
+                }
             } label: {
                 Text("Send Code")
             }
@@ -85,6 +90,10 @@ struct PhoneVerificationView: View {
         .sheet(isPresented: $showingCountryPicker) {
             CountryCodesView(selectedCountry: self.$selectedCountry)
         }
+        .sheet(isPresented: $showErrorSheet, content: {
+            PhoneErrorView()
+                .presentationDetents([.height(200)])
+        })
         .navigationDestination(isPresented: $showCodeVerification) {
             CodeVerificationView(phoneNumber: "+"+selectedCountry.calling+phoneNumber, OTP: $verificationID)
         }
@@ -115,7 +124,11 @@ extension PhoneVerificationView {
 extension PhoneVerificationView {
     
 //    // MARK: Phone Number Verification
-    func verifyPhoneNumber() {
+    func verifyPhoneNumberisValid() -> Bool {
+        return false
+    }
+    
+    func sendVerificationID() {
         PhoneAuthProvider.provider()
             .verifyPhoneNumber("+"+selectedCountry.calling+phoneNumber, uiDelegate: nil) { verificationID, error in
               if let error = error {
