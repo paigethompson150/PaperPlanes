@@ -68,12 +68,14 @@ struct PhoneVerificationView: View {
             
             Spacer()
             Button {
-                if verifyPhoneNumberisValid() {
-                    sendVerificationID()
-                    showCodeVerification = true
-                } else {
-                    showErrorSheet = true
-                }
+//                if verifyPhoneNumberisValid(value:"+"+selectedCountry.calling+phoneNumber) {
+//                    sendVerificationID()
+//                    showCodeVerification = true
+//                } else {
+//                    showErrorSheet = true
+//                }
+                sendVerificationID()
+                showCodeVerification = true
             } label: {
                 Text("Send Code")
             }
@@ -131,8 +133,11 @@ extension PhoneVerificationView {
 extension PhoneVerificationView {
     
     // MARK: Phone Number Verification
-    func verifyPhoneNumberisValid() -> Bool {
-        return false
+    func verifyPhoneNumberisValid(value: String) -> Bool {
+        let PHONE_REGEX = "^((\\+)|(00))[0-9]{6,14}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result = phoneTest.evaluate(with: value)
+        return result
     }
     
     func sendVerificationID() {
