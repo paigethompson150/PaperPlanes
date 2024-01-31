@@ -91,8 +91,15 @@ struct PhoneVerificationView: View {
             CountryCodesView(selectedCountry: self.$selectedCountry)
         }
         .sheet(isPresented: $showErrorSheet, content: {
-            PhoneErrorView()
-                .presentationDetents([.height(200)])
+            if #available(iOS 16.4, *) {
+                PhoneErrorView()
+                    .presentationDetents([.height(100)])
+                    .presentationBackground(.ultraThinMaterial)
+                    .presentationCornerRadius(15)
+            } else {
+                PhoneErrorView()
+                    .presentationDetents([.height(150)])
+            }
         })
         .navigationDestination(isPresented: $showCodeVerification) {
             CodeVerificationView(phoneNumber: "+"+selectedCountry.calling+phoneNumber, OTP: $verificationID)
@@ -123,7 +130,7 @@ extension PhoneVerificationView {
 
 extension PhoneVerificationView {
     
-//    // MARK: Phone Number Verification
+    // MARK: Phone Number Verification
     func verifyPhoneNumberisValid() -> Bool {
         return false
     }

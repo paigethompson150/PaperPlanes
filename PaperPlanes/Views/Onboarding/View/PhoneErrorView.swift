@@ -13,6 +13,7 @@ struct PhoneErrorView: View {
     var body: some View {
         HStack {
             Text("Please enter a valid phone number")
+                .bold()
         }
     }
 }
